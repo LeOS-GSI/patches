@@ -1,0 +1,12 @@
+diff --git a/core/res/res/xml/config_webview_packages.xml b/core/res/res/xml/config_webview_packages.xml
+index f062b59a008c..fb279f9d44af 100644
+--- a/core/res/res/xml/config_webview_packages.xml
++++ b/core/res/res/xml/config_webview_packages.xml
+@@ -16,6 +16,6 @@
+ 
+ <webviewproviders>
+     <!-- The default WebView implementation -->
+-    <webviewprovider description="Android WebView" packageName="com.android.webview" availableByDefault="true">
++    <webviewprovider description="Mulch WebView" packageName="us.spotco.mulch_wv" availableByDefault="true">
+     </webviewprovider>
+ </webviewproviders>

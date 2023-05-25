@@ -1,0 +1,64 @@
+diff --git a/src/com/android/settings/security/SecuritySettings.java b/src/com/android/settings/security/SecuritySettings.java
+index b30b54d4d4..62eeaefd57 100644
+--- a/src/com/android/settings/security/SecuritySettings.java
++++ b/src/com/android/settings/security/SecuritySettings.java
+@@ -105,6 +105,7 @@ public class SecuritySettings extends DashboardFragment {
+         securityPreferenceControllers.add(new CombinedBiometricStatusPreferenceController(
+                 context, lifecycle));
+         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
++        securityPreferenceControllers.add(new HostsPreferenceController(context));
+         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
+                 .setChildren(securityPreferenceControllers));
+         controllers.addAll(securityPreferenceControllers);
+diff --git a/src/com/android/settings/network/NetworkDashboardFragment.java b/src/com/android/settings/network/NetworkDashboardFragment.java
+index 0cd24dc2a2..31295e9f83 100644
+--- a/src/com/android/settings/network/NetworkDashboardFragment.java
++++ b/src/com/android/settings/network/NetworkDashboardFragment.java
+@@ -121,6 +121,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
+         }
+         controllers.add(privateDnsPreferenceController);
+         controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
++        ConnectivityCheckPreferenceController connectivityCheck =
++                new ConnectivityCheckPreferenceController(context);
++        controllers.add(connectivityCheck);
+         return controllers;
+     }
+
+diff --git a/res/xml/security_dashboard_settings.xml b/res/xml/security_dashboard_settings.xml
+index 0550441d3f..475c398ac0 100644
+--- a/res/xml/security_dashboard_settings.xml
++++ b/res/xml/security_dashboard_settings.xml
+@@ -60,6 +60,12 @@
+             android:title="@string/security_settings_biometric_preference_title"
+             android:summary="@string/summary_placeholder"
+             settings:keywords="@string/keywords_biometric_settings" />
++
++        <SwitchPreference
++            android:key="hosts_disable"
++            android:title="@string/hosts_disable_title"
++            android:summary="@string/hosts_disable_summary"
++            android:persistent="false" />
+     </PreferenceCategory>
+
+     <Preference
+@@ -71,4 +77,4 @@
+         settings:controller="com.android.settings.security.SecurityAdvancedSettingsController"
+         settings:keywords="@string/security_advanced_settings_keywords" />
+
+-</PreferenceScreen>
+\ No newline at end of file
++</PreferenceScreen>
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 27364b13dd..fa753aaa8e 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -753,6 +753,9 @@
+     <string name="native_debug_title">Enable native code debugging</string>
+     <string name="native_debug_summary">Generate useful logs / bug reports from crashes and permit debugging native code.</string>
+
++    <string name="hosts_disable_title">Disable DNS content blocker</string>
++    <string name="hosts_disable_summary">Disables use of the included /etc/hosts database for data collection and malware blocking.</string>
++
+     <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
+     <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
+     <!-- Text shown for the description of the lock when trust lost option [CHAR LIMIT=NONE -->

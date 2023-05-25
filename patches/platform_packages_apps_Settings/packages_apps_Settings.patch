@@ -1,0 +1,48 @@
+diff --git a/res/xml/firmware_version.xml b/res/xml/firmware_version.xml
+index 4eb25fd578..7b55302bf0 100644
+--- a/res/xml/firmware_version.xml
++++ b/res/xml/firmware_version.xml
+@@ -33,7 +33,7 @@
+     <!-- Lineage version -->
+     <Preference
+         android:key="lineage_version"
+-        android:title="@*lineageos.platform:string/lineage_version"
++        android:title="LeOS-Version"
+         android:summary="@string/summary_placeholder"
+         settings:enableCopying="true"
+         settings:controller="com.android.settings.deviceinfo.firmwareversion.LineageVersionDetailPreferenceController"/>
+diff --git a/res/xml/my_device_info.xml b/res/xml/my_device_info.xml
+index 0bd774b1bd..22c31234c7 100644
+--- a/res/xml/my_device_info.xml
++++ b/res/xml/my_device_info.xml
+@@ -133,7 +133,7 @@
+         <Preference
+             android:key="lineage_os_version"
+             android:order="43"
+-            android:title="@*lineageos.platform:string/lineage_version"
++            android:title="LeOS-Version"
+             android:summary="@string/summary_placeholder"
+             settings:enableCopying="true"
+             settings:controller="com.android.settings.deviceinfo.firmwareversion.LineageVersionDetailPreferenceController"/>
+diff --git a/src/com/android/settings/wifi/WifiStatusTest.java b/src/com/android/settings/wifi/WifiStatusTest.java
+index b4f3ab6ca4..3ca96f1c90 100644
+--- a/src/com/android/settings/wifi/WifiStatusTest.java
++++ b/src/com/android/settings/wifi/WifiStatusTest.java
+@@ -344,7 +344,7 @@ public class WifiStatusTest extends Activity {
+     private final void pingHostname() {
+         try {
+             // TODO: Hardcoded for now, make it UI configurable
+-            Process p = Runtime.getRuntime().exec("ping -c 1 -w 100 www.google.com");
++            Process p = Runtime.getRuntime().exec("ping -c 1 -w 100 leos-gsi.de");
+             int status = p.waitFor();
+             if (status == 0) {
+                 mPingHostnameResult = "Pass";
+@@ -364,7 +364,7 @@ public class WifiStatusTest extends Activity {
+         HttpURLConnection urlConnection = null;
+         try {
+             // TODO: Hardcoded for now, make it UI configurable
+-            URL url = new URL("https://www.google.com");
++            URL url = new URL("https://leos-gsi.de");
+             urlConnection = (HttpURLConnection) url.openConnection();
+             if (urlConnection.getResponseCode() == 200) {
+                 mHttpClientTestResult = "Pass";

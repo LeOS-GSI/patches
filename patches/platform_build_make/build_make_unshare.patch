@@ -1,0 +1,12 @@
+diff --git a/target/board/BoardConfigMainlineCommon.mk b/target/board/BoardConfigMainlineCommon.mk
+index 94fcacad1..25e39f5d8 100644
+--- a/target/board/BoardConfigMainlineCommon.mk
++++ b/target/board/BoardConfigMainlineCommon.mk
+@@ -6,6 +6,7 @@
+ TARGET_NO_BOOTLOADER := true
+ TARGET_NO_RECOVERY := true
+ 
++BOARD_EXT4_SHARE_DUP_BLOCKS := true
+ TARGET_USERIMAGES_USE_EXT4 := true
+ 
+ # Mainline devices must have /system_ext, /vendor and /product partitions.

@@ -1,0 +1,29 @@
+diff --git a/overlay/common/frameworks/base/core/res/res/values/config.xml b/overlay/common/frameworks/base/core/res/res/values/config.xml
+index d78c93c4..b8e4a7e9 100644
+--- a/overlay/common/frameworks/base/core/res/res/values/config.xml
++++ b/overlay/common/frameworks/base/core/res/res/values/config.xml
+@@ -94,15 +94,9 @@
+     <!-- List of packages that can use the Conversation space for their category messages
+     notifications until they target R -->
+     <string-array name="config_notificationMsgPkgsAllowedAsConvos" translatable="false">
+-        <item>com.facebook.orca</item>
+         <item>com.instagram.android</item>
+-        <item>com.whatsapp</item>
+-        <item>com.snapchat.android</item>
+-        <item>jp.naver.line.android</item>
+-        <item>com.kakao.talk</item>
+         <item>com.discord</item>
+         <item>org.thoughtcrime.securesms</item>
+-        <item>com.groupme.android</item>
+         <item>org.telegram.messenger</item>
+         <item>com.twitter.android</item>
+         <item>com.viber.voip</item>
+@@ -172,9 +166,6 @@
+          should also be non-empty.-->
+     <string name="config_rawContactsLocalAccountType" translatable="false">com.android.contacts</string>
+ 
+-    <!-- Default component for QR code scanner -->
+-    <string name="config_defaultQrCodeComponent" translatable="false">org.lineageos.aperture/.QrScannerActivity</string>
+-
+     <!-- Name of the font family to use in the default lockscreen clock -->
+     <string name="config_clockFontFamily" translatable="false" />

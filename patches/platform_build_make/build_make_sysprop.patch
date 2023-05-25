@@ -1,0 +1,40 @@
+diff --git a/core/sysprop.mk b/core/sysprop.mk
+index 5ff93a13e..de4dd8b4c 100644
+--- a/core/sysprop.mk
++++ b/core/sysprop.mk
+@@ -47,7 +47,7 @@ define generate-common-build-props
+         echo "ro.product.$(1).device=$${TARGET_DEVICE:-$(TARGET_DEVICE)}" >> $(2);\
+         echo "ro.product.$(1).manufacturer=$(PRODUCT_MANUFACTURER)" >> $(2);\
+         echo "ro.product.$(1).model=$${PRODUCT_MODEL:-$(PRODUCT_MODEL)}" >> $(2);\
+-        echo "ro.product.$(1).name=$${TARGET_PRODUCT:-$(TARGET_PRODUCT)}" >> $(2);\
++        echo "ro.product.$(1).name=$${TARGET_PRODUCT:-LeOS}" >> $(2);\
+     )\
+     $(if $(filter true,$(ZYGOTE_FORCE_64)),\
+         $(if $(filter vendor,$(1)),\
+@@ -160,7 +160,7 @@ endif
+ # Both of these tags will be removed and replaced with "release-keys"
+ # when the target-files is signed in a post-build step.
+ ifeq ($(DEFAULT_SYSTEM_DEV_CERTIFICATE),build/make/target/product/security/testkey)
+-BUILD_KEYS := test-keys
++BUILD_KEYS := release-keys
+ else
+ BUILD_KEYS := dev-keys
+ endif
+@@ -175,7 +175,7 @@ ifeq (,$(strip $(BUILD_FINGERPRINT)))
+   else
+     BF_BUILD_NUMBER := $(file <$(BUILD_NUMBER_FILE))
+   endif
+-  BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(TARGET_PRODUCT)/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BF_BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
++  BUILD_FINGERPRINT := $(PRODUCT_BRAND)/LeOS/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BF_BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
+ endif
+ # unset it for safety.
+ BF_BUILD_NUMBER :=
+@@ -207,7 +207,7 @@ BUILD_THUMBPRINT :=
+ #
+ 
+ # BUILD_ID: detail info; has the same info as the build fingerprint
+-BUILD_DESC := $(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT) $(PLATFORM_VERSION) $(BUILD_ID) $(BUILD_NUMBER_FROM_FILE) $(BUILD_VERSION_TAGS)
++BUILD_DESC := LeOS-$(TARGET_BUILD_VARIANT) $(PLATFORM_VERSION) $(BUILD_ID) $(BUILD_NUMBER_FROM_FILE) $(BUILD_VERSION_TAGS)
+ 
+ # BUILD_DISPLAY_ID is shown under Settings -> About Phone
+ ifeq ($(TARGET_BUILD_VARIANT),user)

@@ -1,0 +1,13 @@
+diff --git a/common/framework/com/android/net/module/util/ConnectivitySettingsUtils.java b/common/framework/com/android/net/module/util/ConnectivitySettingsUtils.java
+index b7eb70b..4109f7a 100644
+--- a/common/framework/com/android/net/module/util/ConnectivitySettingsUtils.java
++++ b/common/framework/com/android/net/module/util/ConnectivitySettingsUtils.java
+@@ -84,7 +84,7 @@ public class ConnectivitySettingsUtils {
+         if (TextUtils.isEmpty(mode)) mode = Settings.Global.getString(cr, PRIVATE_DNS_DEFAULT_MODE);
+         // If both PRIVATE_DNS_MODE and PRIVATE_DNS_DEFAULT_MODE are not set, choose
+         // PRIVATE_DNS_MODE_OPPORTUNISTIC as default mode.
+-        if (TextUtils.isEmpty(mode)) return PRIVATE_DNS_MODE_OPPORTUNISTIC;
++        if (TextUtils.isEmpty(mode)) return PRIVATE_DNS_MODE_OFF;
+         return getPrivateDnsModeAsInt(mode);
+     }
+ 

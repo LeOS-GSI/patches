@@ -1,0 +1,13 @@
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 40722275..9325eb60 100755
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -92,7 +92,7 @@
+             <category android:name="android.intent.category.DEFAULT" />
+             <category android:name="android.intent.category.BROWSABLE" />
+             <data
+-                android:host="g.co"
++                android:host="leos-gsi.de"
+                 android:pathPrefix="/wallpaper"
+                 android:scheme="https" />
+         </intent-filter>

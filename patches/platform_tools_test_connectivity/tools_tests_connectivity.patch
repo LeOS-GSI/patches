@@ -1,0 +1,144 @@
+diff --git a/acts_tests/tests/google/net/BluetoothTetheringTest.py b/acts_tests/tests/google/net/BluetoothTetheringTest.py
+index 318ed53c4..d0247d54d 100644
+--- a/acts_tests/tests/google/net/BluetoothTetheringTest.py
++++ b/acts_tests/tests/google/net/BluetoothTetheringTest.py
+@@ -25,8 +25,9 @@ from acts_contrib.test_utils.net import net_test_utils as nutils
+ from acts_contrib.test_utils.tel.tel_data_utils import wait_for_cell_data_connection
+ from acts_contrib.test_utils.wifi import wifi_test_utils as wutils
+ 
+-DEFAULT_PING_URL = "https://www.google.com/robots.txt"
+-
++######### LeOS Changes
++DEFAULT_PING_URL = "https://apo161.de/robots.txt"
++###################################################
+ 
+ class BluetoothTetheringTest(BluetoothBaseTest):
+   """Tests for Bluetooth Tethering."""
+diff --git a/acts_tests/tests/google/net/CaptivePortalTest.py b/acts_tests/tests/google/net/CaptivePortalTest.py
+index 9772fed70..22967912d 100644
+--- a/acts_tests/tests/google/net/CaptivePortalTest.py
++++ b/acts_tests/tests/google/net/CaptivePortalTest.py
+@@ -206,7 +206,7 @@ class CaptivePortalTest(WifiBaseTest):
+         # set private dns to strict mode
+         cutils.set_private_dns(self.dut,
+                                cconst.PRIVATE_DNS_MODE_STRICT,
+-                               cconst.DNS_GOOGLE_HOSTNAME)
++                               cconst.DNS_QUAD9_HOSTNAME)
+ 
+         # verify connection to captive portal network
+         self._verify_captive_portal(self.rk_captive_portal)
+@@ -253,7 +253,7 @@ class CaptivePortalTest(WifiBaseTest):
+         # set private dns to strict mode
+         cutils.set_private_dns(self.dut,
+                                cconst.PRIVATE_DNS_MODE_STRICT,
+-                               cconst.DNS_GOOGLE_HOSTNAME)
++                               cconst.DNS_QUAD9_HOSTNAME)
+ 
+         # verify connection to captive portal network
+         self._verify_captive_portal(self.gg_captive_portal)
+@@ -295,7 +295,7 @@ class CaptivePortalTest(WifiBaseTest):
+         """
+         cutils.set_private_dns(self.dut,
+                                cconst.PRIVATE_DNS_MODE_STRICT,
+-                               cconst.DNS_GOOGLE_HOSTNAME)
++                               cconst.DNS_QUAD9_HOSTNAME)
+         self.openwrt.network_setting.service_manager.restart("opennds")
+         self._verify_captive_portal(self.wifi_network, click_accept="Continue")
+ 
+diff --git a/acts_tests/tests/google/net/DnsOverHttpsTest.py b/acts_tests/tests/google/net/DnsOverHttpsTest.py
+index 56f379296..d1c64909f 100644
+--- a/acts_tests/tests/google/net/DnsOverHttpsTest.py
++++ b/acts_tests/tests/google/net/DnsOverHttpsTest.py
+@@ -213,7 +213,8 @@ class DnsOverHttpsTest(WifiBaseTest):
+         """
+         self._test_public_doh_mode(self.dut, self.get_wifi_network(),
+                                    cconst.PRIVATE_DNS_MODE_STRICT,
+-                                   hostname=cconst.DNS_GOOGLE_HOSTNAME)
++                                   hostname=cconst.DNS_QUAD9_HOSTNAME)
++
+ 
+     def test_mix_server_ipv4_ipv6_wifi_network_with_dns_strict_mode(self):
+         """Test doh flag with below situation.
+@@ -224,7 +225,8 @@ class DnsOverHttpsTest(WifiBaseTest):
+         """
+         self._test_public_doh_mode(self.dut, self.get_wifi_network(),
+                                    cconst.PRIVATE_DNS_MODE_STRICT,
+-                                   hostname=cconst.DNS_GOOGLE_HOSTNAME)
++                                   hostname=cconst.DNS_QUAD9_HOSTNAME)
++
+ 
+     def test_pure_server_ipv4_only_wifi_network_with_dns_strict_mode(self):
+         """Test doh flag with below situation.
+@@ -255,7 +257,7 @@ class DnsOverHttpsTest(WifiBaseTest):
+         - DNS server supporting both Dns, DoT and DoH protocols
+         - IPv4-only network
+         """
+-        self.default_dns = cconst.DNS_GOOGLE_ADDR_V4
++        self.default_dns = cconst.DNS_QUAD9_ADDR_V4
+         self._test_public_doh_mode(self.dut, self.get_wifi_network(),
+                                    cconst.PRIVATE_DNS_MODE_OPPORTUNISTIC)
+ 
+@@ -266,8 +268,8 @@ class DnsOverHttpsTest(WifiBaseTest):
+         - DNS server supporting both Dns, DoT and DoH protocols
+         - IPv4-IPv6 network
+         """
+-        self.default_dns = cconst.DNS_GOOGLE_ADDR_V4
+-        self.default_dns_v6 = cconst.DNS_GOOGLE_ADDR_V6
++        self.default_dns = cconst.DNS_QUAD9_ADDR_V4
++        self.default_dns_v6 = cconst.DNS_QUAD9_ADDR_V6
+         self._test_public_doh_mode(self.dut, self.get_wifi_network(),
+                                    cconst.PRIVATE_DNS_MODE_OPPORTUNISTIC)
+ 
+@@ -278,7 +280,7 @@ class DnsOverHttpsTest(WifiBaseTest):
+         - DNS server supporting both Dns, DoT and DoH protocols
+         - IPv4-only network
+         """
+-        self.default_dns = cconst.DNS_GOOGLE_ADDR_V4
++        self.default_dns = cconst.DNS_QUAD9_ADDR_V4
+         self._test_public_doh_mode(self.dut, self.get_wifi_network(),
+                                    cconst.PRIVATE_DNS_MODE_OFF)
+ 
+@@ -289,7 +291,7 @@ class DnsOverHttpsTest(WifiBaseTest):
+         - DNS server supporting both Dns, DoT and DoH protocols
+         - IPv4-IPv6 network
+         """
+-        self.default_dns = cconst.DNS_GOOGLE_ADDR_V4
+-        self.default_dns_v6 = cconst.DNS_GOOGLE_ADDR_V6
++        self.default_dns = cconst.DNS_QUAD9_ADDR_V4
++        self.default_dns_v6 = cconst.DNS_QUAD9_ADDR_V6
+         self._test_public_doh_mode(self.dut, self.get_wifi_network(),
+                                    cconst.PRIVATE_DNS_MODE_OFF)
+diff --git a/acts_tests/tests/google/net/DnsOverTlsTest.py b/acts_tests/tests/google/net/DnsOverTlsTest.py
+index 0bb1e2837..a00034dd1 100644
+--- a/acts_tests/tests/google/net/DnsOverTlsTest.py
++++ b/acts_tests/tests/google/net/DnsOverTlsTest.py
+@@ -68,7 +68,7 @@ class DnsOverTlsTest(WifiBaseTest):
+             self.private_dns_servers = [self.dns_name]
+             self.openwrt.network_setting.setup_dns_server(self.dns_name)
+         else:
+-            self.private_dns_servers = [cconst.DNS_GOOGLE_HOSTNAME,
++            self.private_dns_servers = [cconst.DNS_QUAD9_HOSTNAME,
+                                         cconst.DNS_QUAD9_HOSTNAME,
+                                         cconst.DNS_CLOUDFLARE_HOSTNAME]
+         self.tcpdump_pid = None
+@@ -520,7 +520,7 @@ class DnsOverTlsTest(WifiBaseTest):
+ 
+         # set private DNS to strict mode
+         cutils.set_private_dns(
+-            self.dut, cconst.PRIVATE_DNS_MODE_STRICT, cconst.DNS_GOOGLE_HOSTNAME)
++            self.dut, cconst.PRIVATE_DNS_MODE_STRICT, cconst.DNS_QUAD9_HOSTNAME)
+ 
+         # connect DUT to wifi network
+         wutils.start_wifi_connection_scan_and_ensure_network_found(
+@@ -549,9 +549,9 @@ class DnsOverTlsTest(WifiBaseTest):
+         pcap_file = self._stop_tcp_dump(self.dut)
+ 
+         # Verify DNS server in link properties
+-        asserts.assert_true(cconst.DNS_GOOGLE_HOSTNAME in wifi_dns_servers,
++        asserts.assert_true(cconst.DNS_QUAD9_HOSTNAME in wifi_dns_servers,
+                             "Hostname not in link properties - wifi network")
+-        asserts.assert_true(cconst.DNS_GOOGLE_HOSTNAME in lte_dns_servers,
++        asserts.assert_true(cconst.DNS_QUAD9_HOSTNAME in lte_dns_servers,
+                             "Hostname not in link properites - cell network")
+ 
+     @test_tracker_info(uuid="525a6f2d-9751-474e-a004-52441091e427")

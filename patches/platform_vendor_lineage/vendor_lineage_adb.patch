@@ -1,0 +1,16 @@
+diff --git a/bootanimation/bootanimation.tar b/bootanimation/bootanimation.tar
+index 7e4b0dc9..34f71657 100644
+Binary files a/bootanimation/bootanimation.tar and b/bootanimation/bootanimation.tar differ
+diff --git a/config/common.mk b/config/common.mk
+index 7048c9cb..8fad278d 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -18,7 +18,7 @@ ifeq ($(TARGET_BUILD_VARIANT),eng)
+ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
+ else
+ # Enable ADB authentication
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=1
++PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
+ 
+ # Disable extra StrictMode features on all non-engineering builds
+ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.strictmode.disable=true

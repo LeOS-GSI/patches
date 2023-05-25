@@ -1,0 +1,32 @@
+diff --git a/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java b/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
+index a6a3db11b729..87e8597efb1d 100644
+--- a/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
++++ b/services/core/java/com/android/server/location/gnss/GnssLocationProvider.java
+@@ -1721,27 +1721,6 @@ public class GnssLocationProvider extends AbstractLocationProvider implements
+         int type = AGPS_SETID_TYPE_NONE;
+         String setId = null;
+ 
+-        int subId = SubscriptionManager.getDefaultDataSubscriptionId();
+-        if (mNIHandler.getInEmergency() && mNetworkConnectivityHandler.getActiveSubId() >= 0) {
+-            subId = mNetworkConnectivityHandler.getActiveSubId();
+-        }
+-        if (SubscriptionManager.isValidSubscriptionId(subId)) {
+-            phone = phone.createForSubscriptionId(subId);
+-        }
+-        if ((flags & AGPS_REQUEST_SETID_IMSI) == AGPS_REQUEST_SETID_IMSI) {
+-            setId = phone.getSubscriberId();
+-            if (setId != null) {
+-                // This means the framework has the SIM card.
+-                type = AGPS_SETID_TYPE_IMSI;
+-            }
+-        } else if ((flags & AGPS_REQUEST_SETID_MSISDN) == AGPS_REQUEST_SETID_MSISDN) {
+-            setId = phone.getLine1Number();
+-            if (setId != null) {
+-                // This means the framework has the SIM card.
+-                type = AGPS_SETID_TYPE_MSISDN;
+-            }
+-        }
+-
+         mGnssNative.setAgpsSetId(type, (setId == null) ? "" : setId);
+     }
+ 

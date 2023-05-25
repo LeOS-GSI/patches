@@ -1,0 +1,13 @@
+diff --git a/core/res/res/values/config.xml b/core/res/res/values/config.xml
+index 645f89efadef..c2508666ef5f 100644
+--- a/core/res/res/values/config.xml
++++ b/core/res/res/values/config.xml
+@@ -2390,7 +2390,7 @@
+     <bool name="config_actionMenuItemAllCaps">true</bool>
+ 
+     <!-- Remote server that can provide NTP responses. -->
+-    <string translatable="false" name="config_ntpServer">time.android.com</string>
++    <string translatable="false" name="config_ntpServer">pool.ntp.org</string>
+     <!-- Normal polling frequency in milliseconds -->
+     <integer name="config_ntpPollingInterval">64800000</integer>
+     <!-- Try-again polling interval in milliseconds, in case the network request failed -->

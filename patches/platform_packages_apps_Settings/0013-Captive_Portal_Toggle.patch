@@ -1,0 +1,55 @@
+diff --git a/res/values/arrays.xml b/res/values/arrays.xml
+index 42d60eee98..1bf9419a63 100644
+--- a/res/values/arrays.xml
++++ b/res/values/arrays.xml
+@@ -122,6 +122,24 @@
+         <item>@string/dark_ui_auto_mode_custom_bedtime</item>
+     </string-array>
+ 
++    <string-array name="connectivity_check_entries">
+++        <item>Disabled</item>
+++        <item>Kuketz (DE) [default]</item>
+++        <item>DivestOS (US)</item>
+++        <item>openSUSE (DE)</item>
+++        <item>Ubuntu (UK)</item>
+++        <item>Kuketz (DE)</item>
++    </string-array>
++
++    <string-array name="connectivity_check_values" translatable="false">
++        <item>0</item>
++        <item>1</item>
++        <item>3</item>
++        <item>4</item>
++        <item>5</item>
++        <item>6</item>
++    </string-array>
++
+     <!-- Security settings.  The delay after screen is turned off until device locks.
+          These are shown in a list dialog. -->
+     <string-array name="lock_after_timeout_entries">
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index d8a2c3b41c..5b7c194882 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -14456,5 +14456,6 @@
+     <string name="bt_le_audio_scan_qr_code_scanner">To start listening, center the QR code below</string>
+     <!-- [CHAR LIMIT=NONE] Hint for QR code process failure -->
+     <string name="bt_le_audio_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
+-
++    <string name="connectivity_check_title">Internet connectivity check</string>
++    <string name="connectivity_check_summary">HTTP endpoints to use for performing internet connectivity checks.</string>
+ </resources>
+diff --git a/src/com/android/settings/network/NetworkDashboardFragment.java b/src/com/android/settings/network/NetworkDashboardFragment.java
+index 0cd24dc2a2..31295e9f83 100644
+--- a/src/com/android/settings/network/NetworkDashboardFragment.java
++++ b/src/com/android/settings/network/NetworkDashboardFragment.java
+@@ -121,6 +121,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
+         }
+         controllers.add(privateDnsPreferenceController);
+         controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
++        ConnectivityCheckPreferenceController connectivityCheck =
++                new ConnectivityCheckPreferenceController(context);
++        controllers.add(connectivityCheck);
+         return controllers;
+     }
+ 

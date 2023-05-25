@@ -1,0 +1,12 @@
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 4f580e0bd6..50f6f3756c 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -60,7 +60,6 @@
+                 <action android:name="android.intent.action.MAIN" />
+                 <action android:name="android.intent.action.SHOW_WORK_APPS" />
+                 <category android:name="android.intent.category.HOME" />
+-                <category android:name="android.intent.category.DEFAULT" />
+                 <category android:name="android.intent.category.MONKEY"/>
+                 <category android:name="android.intent.category.LAUNCHER_APP" />
+             </intent-filter>

@@ -1,0 +1,25 @@
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index dd7c2cbee..1d47f4428 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -61,6 +61,11 @@
+         android:name="android.hardware.telephony"
+         android:required="false"/>
+ 
++    <uses-feature
++    android:name="android.software.leanback"
++    android:required="true" />
++
++
+     <application
+         android:name="com.android.contacts.ContactsApplication"
+         android:hardwareAccelerated="true"
+@@ -84,7 +89,7 @@
+                 <action android:name="android.intent.action.MAIN"/>
+ 
+                 <category android:name="android.intent.category.DEFAULT"/>
+-                <category android:name="android.intent.category.LAUNCHER"/>
++                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+                 <category android:name="android.intent.category.BROWSABLE"/>
+                 <category android:name="android.intent.category.APP_CONTACTS"/>
+             </intent-filter>

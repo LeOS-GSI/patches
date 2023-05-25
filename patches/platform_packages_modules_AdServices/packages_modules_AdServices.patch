@@ -1,0 +1,239 @@
+diff --git a/adservices/apk/Android.bp b/adservices/apk/Android.bp
+deleted file mode 100644
+index 2c6b2e6..0000000
+--- a/adservices/apk/Android.bp
++++ /dev/null
+@@ -1,45 +0,0 @@
+-// Copyright (C) 2022 The Android Open Source Project
+-//
+-// Licensed under the Apache License, Version 2.0 (the "License");
+-// you may not use this file except in compliance with the License.
+-// You may obtain a copy of the License at
+-//
+-//     http://www.apache.org/licenses/LICENSE-2.0
+-//
+-// Unless required by applicable law or agreed to in writing, software
+-// distributed under the License is distributed on an "AS IS" BASIS,
+-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-// See the License for the specific language governing permissions and
+-// limitations under the License.
+-
+-package {
+-    default_applicable_licenses: ["Android-Apache-2.0"],
+-}
+-
+-android_app_certificate {
+-    name: "com.android.adservices.api.certificate",
+-    certificate: "com.android.adservices.api",
+-}
+-
+-android_app {
+-    name: "AdServicesApk",
+-    sdk_version: "module_current",
+-    min_sdk_version: "Tiramisu",
+-    certificate: ":com.android.adservices.api.certificate",
+-    privileged: true,
+-    srcs: [
+-        "java/**/*.java",
+-    ],
+-    libs: [
+-        // Need it to access hidden stuff in framework-adservices.
+-        "framework-adservices.impl",
+-    ],
+-    static_libs: [
+-        "adservices-service-core",
+-    ],
+-    // TODO(b/208705888): Renable tflite.
+-    // jni_libs: ["libtensorflowlite_jni"],
+-    use_embedded_native_libs: true,
+-    required: ["privapp_allowlist_com.android.adservices.api.xml"],
+-    apex_available: ["com.android.adservices"],
+-}
+diff --git a/adservices/apk/AndroidManifest.xml b/adservices/apk/AndroidManifest.xml
+deleted file mode 100644
+index 08a08bb..0000000
+--- a/adservices/apk/AndroidManifest.xml
++++ /dev/null
+@@ -1,61 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<!--
+-/*
+- * Copyright (C) 2022 The Android Open Source Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+--->
+-<manifest
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    package="com.android.adservices.api">
+-
+-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+-
+-    <application
+-        android:label="Android AdServices"
+-        android:forceQueryable="true"
+-        android:directBootAware="true">
+-
+-        <!-- TODO(b/221123093): Support multi-user. -->
+-        <service android:name="com.android.adservices.topics.TopicsService"
+-            android:exported="true"
+-            android:singleUser="true"
+-            android:visibleToInstantApps="false"
+-            >
+-            <intent-filter>
+-                <action android:name="android.adservices.TOPICS_SERVICE" />
+-            </intent-filter>
+-        </service>
+-
+-        <!-- Daily maintenance Job. -->
+-        <service android:name="com.android.adservices.service.MaintenanceJobService"
+-            android:permission="android.permission.BIND_JOB_SERVICE">
+-        </service>
+-
+-        <!-- Epoch computation Job. -->
+-        <service android:name="com.android.adservices.service.topics.EpochJobService"
+-            android:permission="android.permission.BIND_JOB_SERVICE">
+-        </service>
+-
+-        <!-- Common Service. -->
+-        <service android:name="com.android.adservices.common.AdServicesCommonService"
+-                 android:exported="true"
+-                 android:visibleToInstantApps="false">
+-            <intent-filter android:priority="1">
+-                <action android:name="android.adservices.AD_SERVICES_COMMON_SERVICE"/>
+-            </intent-filter>
+-        </service>
+-    </application>
+-</manifest>
+diff --git a/adservices/apk/com.android.adservices.api.pk8 b/adservices/apk/com.android.adservices.api.pk8
+deleted file mode 100644
+index dcbee56..0000000
+Binary files a/adservices/apk/com.android.adservices.api.pk8 and /dev/null differ
+diff --git a/adservices/apk/com.android.adservices.api.x509.pem b/adservices/apk/com.android.adservices.api.x509.pem
+deleted file mode 100644
+index d09f918..0000000
+--- a/adservices/apk/com.android.adservices.api.x509.pem
++++ /dev/null
+@@ -1,24 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIECzCCAvOgAwIBAgIUfdxbo2DAv2BcN/VoVV6/i6vwyAswDQYJKoZIhvcNAQEL
+-BQAwgZQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQH
+-DA1Nb3VudGFpbiBWaWV3MRAwDgYDVQQKDAdBbmRyb2lkMRAwDgYDVQQLDAdBbmRy
+-b2lkMRAwDgYDVQQDDAdBbmRyb2lkMSIwIAYJKoZIhvcNAQkBFhNhbmRyb2lkQGFu
+-ZHJvaWQuY29tMB4XDTIyMDIyNDE2MDU0N1oXDTQ5MDcxMjE2MDU0N1owgZQxCzAJ
+-BgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1Nb3VudGFp
+-biBWaWV3MRAwDgYDVQQKDAdBbmRyb2lkMRAwDgYDVQQLDAdBbmRyb2lkMRAwDgYD
+-VQQDDAdBbmRyb2lkMSIwIAYJKoZIhvcNAQkBFhNhbmRyb2lkQGFuZHJvaWQuY29t
+-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ECVqoIE6zXtaqxVWJaS
+-n08qAaNmHDE0OC+x3AMc4yE760OH5bJnOq1/LiDptz/n+LoHL9aSJiPGGbHRSs/j
+-OPIlUzcfFi+q9ECQB0eA0FbQ1e137coBKXHaIMHNpFyrtofFehLXmoBahSMbnTVr
+-E9RDE6wTuzwyKKuZCsGENeB11C4v2yLWKKmvK5Vz8Odj+fVxHMH46ulWqUSHJFIf
+-gFjbE+NHtDHa8riXNLwupfulQAAClBhiM54GEzLmefgFNJm0glb67WRUgYcjTyiQ
+-GqRriLQcvaocDmiP6od1pLSg1yEJr8qNR3EhMnKnsql4mneSwVfCXPZuK+USv8rh
+-FQIDAQABo1MwUTAdBgNVHQ4EFgQUpoFb9mM8gVvVQKX3gbudkIV3gywwHwYDVR0j
+-BBgwFoAUpoFb9mM8gVvVQKX3gbudkIV3gywwDwYDVR0TAQH/BAUwAwEB/zANBgkq
+-hkiG9w0BAQsFAAOCAQEAKKVB2Uvr2qypwMltK6521XgZHZnWErJR3H3CdCdIKvGV
+-SnKqbjwecsSVfRdl7WcDPc9YvheACHrIxm71fqGZNw6FOgAf/5222BXGK3/+vxw9
+-iIGVNJ7sLh05wVLq/33q8of011tjsuece2lo4t0IzZGcFIHh+mblLrx+jOv+bydw
+-Su2qib85QpNDrQ+T/BcXGh6kGJskifxn9dTnyVXmAX/Adu8A6cQY9chm1q6Ppqhm
+-cAg6zLWQVSIPQYGwpZwt2IzwwHFKTrgHEkoXiSuamTQ1nlJ9Pe1W7uNmUUkn8Lh+
+-B3D1qmHCaiLm3z/UhRasFGg7iLFNStblKTF8TowFmA==
+------END CERTIFICATE-----
+diff --git a/adservices/apk/java/com/android/adservices/adselection/OWNERS b/adservices/apk/java/com/android/adservices/adselection/OWNERS
+deleted file mode 100644
+index 09f66ad..0000000
+--- a/adservices/apk/java/com/android/adservices/adselection/OWNERS
++++ /dev/null
+@@ -1 +0,0 @@
+-file: platform/packages/modules/AdServices:/adservices/OWNERS_FLEDGE
+diff --git a/adservices/apk/java/com/android/adservices/customaudience/OWNERS b/adservices/apk/java/com/android/adservices/customaudience/OWNERS
+deleted file mode 100644
+index 09f66ad..0000000
+--- a/adservices/apk/java/com/android/adservices/customaudience/OWNERS
++++ /dev/null
+@@ -1 +0,0 @@
+-file: platform/packages/modules/AdServices:/adservices/OWNERS_FLEDGE
+diff --git a/adservices/apk/java/com/android/adservices/topics/TopicsService.java b/adservices/apk/java/com/android/adservices/topics/TopicsService.java
+deleted file mode 100644
+index 9b4ceac..0000000
+--- a/adservices/apk/java/com/android/adservices/topics/TopicsService.java
++++ /dev/null
+@@ -1,54 +0,0 @@
+-/*
+- * Copyright (C) 2022 The Android Open Source Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package com.android.adservices.topics;
+-
+-import android.app.Service;
+-import android.content.Intent;
+-import android.os.IBinder;
+-
+-import com.android.adservices.service.MaintenanceJobService;
+-import com.android.adservices.service.topics.EpochJobService;
+-import com.android.adservices.service.topics.TopicsServiceImpl;
+-
+-import java.util.Objects;
+-
+-/** Topics Service */
+-public class TopicsService extends Service {
+-
+-    /** The binder service. This field must only be accessed on the main thread. */
+-    private TopicsServiceImpl mTopicsService;
+-
+-    @Override
+-    public void onCreate() {
+-        super.onCreate();
+-        if (mTopicsService == null) {
+-            mTopicsService = new TopicsServiceImpl(this);
+-        }
+-
+-        schedulePeriodicJobs();
+-    }
+-
+-    private void schedulePeriodicJobs() {
+-        MaintenanceJobService.schedule(this);
+-        EpochJobService.schedule(this);
+-    }
+-
+-
+-    @Override
+-    public IBinder onBind(Intent intent) {
+-        return Objects.requireNonNull(mTopicsService);
+-    }
+-}
+diff --git a/apex/Android.bp b/apex/Android.bp
+index 8642992..e5c940b 100644
+--- a/apex/Android.bp
++++ b/apex/Android.bp
+@@ -30,7 +30,7 @@ android_app_certificate {
+ apex {
+     name: "com.android.adservices",
+     manifest: "manifest.json",
+-    apps: ["AdServicesApk", "SdkSandbox"],
++    apps: ["SdkSandbox"],
+     file_contexts: ":com.android.adservices-file_contexts",
+     key: "com.android.adservices.key",
+     bootclasspath_fragments: ["com.android.adservices-bootclasspath-fragment"],
