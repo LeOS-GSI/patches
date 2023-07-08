@@ -1,3 +1,12 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Daniel Micay <danielmicay@gmail.com>
+Date: Sun, 6 Aug 2017 08:19:36 -0400
+Subject: [PATCH] remove legacy NETWORK permission group reference
+
+---
+ AndroidManifest.xml | 1 -
+ 1 file changed, 1 deletion(-)
+
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
 index 336b2505..a6e61a4f 100644
 --- a/AndroidManifest.xml

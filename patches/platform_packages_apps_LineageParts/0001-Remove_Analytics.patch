@@ -14,10 +14,10 @@ Change-Id: Ic01c97d6ceac8d324609763973639b41b4581a76
  6 files changed, 59 deletions(-)
 
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index 19bbbb8..042d969 100644
+index b42bdc3..06fe237 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
-@@ -225,31 +225,6 @@
+@@ -251,31 +251,6 @@
                  android:resource="@string/summary_empty" />
          </activity-alias>
  
@@ -76,10 +76,10 @@ index a3ee437..c4532c5 100644
           The array should be sorted in the same order as the
           touchscreen gestures advertised by the device's LineageHW impl. -->
 diff --git a/res/values/strings.xml b/res/values/strings.xml
-index 02a5316..a806a7c 100644
+index 4c3a92d..9db0d06 100644
 --- a/res/values/strings.xml
 +++ b/res/values/strings.xml
-@@ -533,28 +533,6 @@
+@@ -550,28 +550,6 @@
                   <b>Total commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
                   <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
  
@@ -108,3 +108,33 @@ index 02a5316..a806a7c 100644
      <!-- Display : Rotation  -->
      <string name="accelerometer_title">Auto-rotate screen</string>
      <string name="display_rotation_title">Rotation settings</string>
+diff --git a/res/xml/parts_catalog.xml b/res/xml/parts_catalog.xml
+index 691ce47..ea2a07b 100644
+--- a/res/xml/parts_catalog.xml
++++ b/res/xml/parts_catalog.xml
+@@ -75,11 +75,6 @@
+           android:fragment="org.lineageos.lineageparts.statusbar.StatusBarSettings"
+           lineage:xmlRes="@xml/status_bar_settings" />
+ 
+-    <part android:key="lineagestats"
+-          android:title="@string/anonymous_statistics_title"
+-          android:fragment="org.lineageos.lineageparts.lineagestats.AnonymousStats"
+-          lineage:xmlRes="@xml/anonymous_stats" />
+-
+     <part android:key="power_menu"
+           android:title="@string/power_menu_title"
+           android:fragment="org.lineageos.lineageparts.input.PowerMenuActions"
+diff --git a/res/xml/trust_preferences.xml b/res/xml/trust_preferences.xml
+index 7cebff4..3b89030 100644
+--- a/res/xml/trust_preferences.xml
++++ b/res/xml/trust_preferences.xml
+@@ -47,9 +47,6 @@
+             android:entryValues="@array/trust_restrict_usb_values"
+             android:defaultValue="0" />
+ 
+-        <lineageos.preference.LineagePartsPreference
+-            android:key="lineagestats" />
+-
+         <ListPreference
+             android:key="sms_security_check_limit"
+             android:defaultValue="30"

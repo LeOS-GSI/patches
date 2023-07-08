@@ -1,15 +1,17 @@
 diff --git a/UID/src/com/android/tests/connectivity/uid/ConnectivityTestActivity.java b/UID/src/com/android/tests/connectivity/uid/ConnectivityTestActivity.java
-index 1b15c20..ec446ae 100644
+index 1b15c20..b9b5adb 100644
 --- a/UID/src/com/android/tests/connectivity/uid/ConnectivityTestActivity.java
 +++ b/UID/src/com/android/tests/connectivity/uid/ConnectivityTestActivity.java
-@@ -83,7 +83,9 @@ public class ConnectivityTestActivity extends Activity {
+@@ -82,8 +82,10 @@ public class ConnectivityTestActivity extends Activity {
+ 
      private boolean httpRequest() {
          HttpURLConnection urlConnection = null;
-         try {
+-        try {
 -            URL targetURL = new URL("http://www.google.com/generate_204");
-+/****** LeOS changes */
-+             URL targetURL = new URL("http://captiveportal.kuketz.de/generate_204");
-+/***** LeOS changes  */
++        try {+
+++/****** LeOS changes */   
+++             URL targetURL = new URL("http://captiveportal.kuketz.de/generate_204");
+++/***** LeOS changes  */  
              urlConnection = (HttpURLConnection) targetURL.openConnection();
              urlConnection.connect();
              int respCode = urlConnection.getResponseCode();

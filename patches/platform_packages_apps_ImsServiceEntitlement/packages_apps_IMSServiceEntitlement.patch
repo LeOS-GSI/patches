@@ -1,5 +1,5 @@
 diff --git a/src/com/android/imsserviceentitlement/ImsEntitlementApi.java b/src/com/android/imsserviceentitlement/ImsEntitlementApi.java
-index 74943ac..7740da9 100644
+index 74943ac..926497d 100644
 --- a/src/com/android/imsserviceentitlement/ImsEntitlementApi.java
 +++ b/src/com/android/imsserviceentitlement/ImsEntitlementApi.java
 @@ -29,8 +29,6 @@ import androidx.annotation.VisibleForTesting;
@@ -11,12 +11,14 @@ index 74943ac..7740da9 100644
  import com.android.imsserviceentitlement.ts43.Ts43Constants.ResponseXmlAttributes;
  import com.android.imsserviceentitlement.ts43.Ts43Constants.ResponseXmlNode;
  import com.android.imsserviceentitlement.ts43.Ts43SmsOverIpStatus;
-@@ -104,8 +102,6 @@ public class ImsEntitlementApi {
+@@ -104,8 +102,8 @@ public class ImsEntitlementApi {
          ServiceEntitlementRequest.Builder requestBuilder = ServiceEntitlementRequest.builder();
          mLastEntitlementConfiguration.getToken().ifPresent(
                  token -> requestBuilder.setAuthenticationToken(token));
 -        FcmUtils.fetchFcmToken(mContext, mSubId);
 -        requestBuilder.setNotificationToken(FcmTokenStore.getToken(mContext, mSubId));
++        //FcmUtils.fetchFcmToken(mContext, mSubId);
++        //requestBuilder.setNotificationToken(FcmTokenStore.getToken(mContext, mSubId));
          // Set fake device info to avoid leaking
          requestBuilder.setTerminalVendor("vendorX");
          requestBuilder.setTerminalModel("modelY");

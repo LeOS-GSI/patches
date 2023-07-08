@@ -1,8 +1,8 @@
 diff --git a/src/com/android/server/telecom/ConnectionServiceWrapper.java b/src/com/android/server/telecom/ConnectionServiceWrapper.java
-index 5bb1dbe08..321fd91df 100755
+index da2669c7c..3eeb963aa 100755
 --- a/src/com/android/server/telecom/ConnectionServiceWrapper.java
 +++ b/src/com/android/server/telecom/ConnectionServiceWrapper.java
-@@ -924,45 +924,7 @@ public class ConnectionServiceWrapper extends ServiceBinder implements
+@@ -921,44 +921,7 @@ public class ConnectionServiceWrapper extends ServiceBinder implements
                              connectIdToCheck = callId;
                          }
  
@@ -44,8 +44,7 @@ index 5bb1dbe08..321fd91df 100755
 -                                    connection.getCallDirection(),
 -                                    connection.getCallerNumberVerificationStatus());
 -                        }
--                        // Check to see if this Connection has already been added.
-+                       // Check to see if this Connection has already been added.
++                        
+                         // Check to see if this Connection has already been added.
                          Call alreadyAddedConnection = mCallsManager
                                  .getAlreadyAddedConnection(connectIdToCheck);
- 

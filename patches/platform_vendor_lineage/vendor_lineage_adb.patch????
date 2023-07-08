@@ -1,6 +1,3 @@
-diff --git a/bootanimation/bootanimation.tar b/bootanimation/bootanimation.tar
-index 7e4b0dc9..34f71657 100644
-Binary files a/bootanimation/bootanimation.tar and b/bootanimation/bootanimation.tar differ
 diff --git a/config/common.mk b/config/common.mk
 index 7048c9cb..8fad278d 100644
 --- a/config/common.mk
